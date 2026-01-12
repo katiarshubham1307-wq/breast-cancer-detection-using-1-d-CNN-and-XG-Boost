@@ -13,6 +13,57 @@ st.set_page_config(
     page_icon="🩺",
     layout="wide"
 )
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("https://www.vecteezy.com/free-photos/medical");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Make content readable */
+    .main {
+        background-color: rgba(255, 255, 255, 0.88);
+        padding: 2rem;
+        border-radius: 15px;
+    }
+
+    h1, h2, h3 {
+        color: #8b0000;
+        text-align: center;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Make content readable */
+    .main {
+        background-color: rgba(255, 255, 255, 0.88);
+        padding: 2rem;
+        border-radius: 15px;
+    }
+
+    h1, h2, h3 {
+        color: #8b0000;
+        text-align: center;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 
