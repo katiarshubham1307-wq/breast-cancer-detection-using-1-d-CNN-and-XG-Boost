@@ -32,32 +32,35 @@ st.markdown("<p style='text-align:center;'>1D CNN + XGBoost | Wisconsin Dataset<
 st.markdown("---")
 
 # ---------------- Sidebar ----------------
+uploaded_file = st.sidebar.file_uploader(
+    "Upload CSV file",
+    type=["csv"]
+)
 st.sidebar.header("📥 Input Options")
 option = st.sidebar.radio("Choose input method:", ["Manual Input", "Upload CSV"])
 
 inputs = []
 
-# ---------------- Manual Input ----------------
 if option == "Manual Input":
-    st.sidebar.subheader("Enter Tumor Features")
     for name in feature_names:
         val = st.sidebar.number_input(name, value=0.0, step=0.01)
         inputs.append(val)
 
-# ---------------- CSV Upload ----------------
-else:
+else:  # CSV Upload
     uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
 
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file, header=None)
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file, header=None)
 
-    if df.empty:
-        st.error("❌ CSV file is empty. Please upload a file with 30 values.")
-    elif df.shape[1] != 30:
-        st.error("❌ CSV must contain exactly 30 features.")
-    else:
-        inputs = df.iloc[0].values.tolist()
-        st.success("✅ CSV file loaded successfully")
+        if df.empty:
+            st.error("❌ CSV file is empty.")
+        elif df.shape[1] != 30:
+            st.error("❌ CSV must contain exactly 30 features.")
+        else:
+            inputs = df.iloc[0].values.tolist()
+            st.success("✅ CSV loaded successfully")
+
+
 
 # ---------------- Main Section ----------------
 col1, col2 = st.columns([2, 1])
