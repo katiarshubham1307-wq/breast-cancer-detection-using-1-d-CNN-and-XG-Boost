@@ -5,6 +5,43 @@ import pickle
 from tensorflow.keras.models import load_model
 
 # ---------------- Page Config ----------------
+import streamlit as st
+
+# Page config
+st.set_page_config(
+    page_title="Breast Cancer Detection",
+    page_icon="🩺",
+    layout="wide"
+)
+
+# Background CSS
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("https://images.unsplash.com/photo-1581091215367-59ab6c58a35a");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* Make content readable */
+    .main {
+        background-color: rgba(255, 255, 255, 0.88);
+        padding: 2rem;
+        border-radius: 15px;
+    }
+
+    h1, h2, h3 {
+        color: #8b0000;
+        text-align: center;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.set_page_config(
     page_title="Breast Cancer Detection",
     page_icon="🩺",
