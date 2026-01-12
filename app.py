@@ -18,12 +18,13 @@ st.markdown(
     .stApp {
         background: linear-gradient(135deg, #e3f2fd, #ffffff);
     }
-
     .main {
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.92);
         padding: 2rem;
-        border-radius: 15px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
+    
     </style>
     """,
     unsafe_allow_html=True
