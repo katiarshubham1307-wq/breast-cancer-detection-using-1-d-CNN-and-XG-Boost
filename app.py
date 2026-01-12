@@ -10,28 +10,6 @@ st.set_page_config(
     page_icon="🩺",
     layout="wide"
 )
-
-# ---------------- Load Models ----------------
-cnn = load_model("model_cnn.h5")
-xgb = pickle.load(open("model_xgb.pkl", "rb"))
-scaler = pickle.load(open("scaler.pkl", "rb"))
-
-# ---------------- Feature Names ----------------
-feature_names = [
-    "Mean Radius", "Mean Texture", "Mean Perimeter", "Mean Area", "Mean Smoothness",
-    "Mean Compactness", "Mean Concavity", "Mean Concave Points", "Mean Symmetry", "Mean Fractal Dimension",
-    "Radius Error", "Texture Error", "Perimeter Error", "Area Error", "Smoothness Error",
-    "Compactness Error", "Concavity Error", "Concave Points Error", "Symmetry Error", "Fractal Dimension Error",
-    "Worst Radius", "Worst Texture", "Worst Perimeter", "Worst Area", "Worst Smoothness",
-    "Worst Compactness", "Worst Concavity", "Worst Concave Points", "Worst Symmetry", "Worst Fractal Dimension"
-]
-# Page configuration
-st.set_page_config(
-    page_title="Breast Cancer Detection",
-    page_icon="🩺",
-    layout="wide"
-)
-
 # Medical gradient background
 st.markdown(
     """
@@ -49,6 +27,21 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# ---------------- Load Models ----------------
+cnn = load_model("model_cnn.h5")
+xgb = pickle.load(open("model_xgb.pkl", "rb"))
+scaler = pickle.load(open("scaler.pkl", "rb"))
+
+# ---------------- Feature Names ----------------
+feature_names = [
+    "Mean Radius", "Mean Texture", "Mean Perimeter", "Mean Area", "Mean Smoothness",
+    "Mean Compactness", "Mean Concavity", "Mean Concave Points", "Mean Symmetry", "Mean Fractal Dimension",
+    "Radius Error", "Texture Error", "Perimeter Error", "Area Error", "Smoothness Error",
+    "Compactness Error", "Concavity Error", "Concave Points Error", "Symmetry Error", "Fractal Dimension Error",
+    "Worst Radius", "Worst Texture", "Worst Perimeter", "Worst Area", "Worst Smoothness",
+    "Worst Compactness", "Worst Concavity", "Worst Concave Points", "Worst Symmetry", "Worst Fractal Dimension"
+]
 
 # ---------------- Title ----------------
 st.markdown("<h1 style='text-align:center;color:#d63384;'>🩺 Breast Cancer Detection System</h1>", unsafe_allow_html=True)
