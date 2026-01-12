@@ -14,56 +14,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Background CSS
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("https://images.unsplash.com/photo-1581091215367-59ab6c58a35a");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
 
-    /* Make content readable */
-    .main {
-        background-color: rgba(255, 255, 255, 0.88);
-        padding: 2rem;
-        border-radius: 15px;
-    }
-
-    h1, h2, h3 {
-        color: #8b0000;
-        text-align: center;
-    }
-
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.set_page_config(
-    page_title="Breast Cancer Detection",
-    page_icon="🩺",
-    layout="wide"
-)
-# Medical gradient background
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    }
-
-    .main {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 15px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # ---------------- Load Models ----------------
 cnn = load_model("model_cnn.h5")
