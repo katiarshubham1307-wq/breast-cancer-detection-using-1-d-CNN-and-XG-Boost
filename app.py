@@ -47,7 +47,11 @@ if option == "Manual Input":
         inputs.append(val)
 
 else:  # CSV Upload
-    uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
+    uploaded_file = st.sidebar.file_uploader(
+        "Upload CSV file (30 features, no header)",
+        type=["csv"],
+        key="csv_uploader"
+    )
 
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file, header=None)
