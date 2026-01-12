@@ -25,6 +25,30 @@ feature_names = [
     "Worst Radius", "Worst Texture", "Worst Perimeter", "Worst Area", "Worst Smoothness",
     "Worst Compactness", "Worst Concavity", "Worst Concave Points", "Worst Symmetry", "Worst Fractal Dimension"
 ]
+# Page configuration
+st.set_page_config(
+    page_title="Breast Cancer Detection",
+    page_icon="🩺",
+    layout="wide"
+)
+
+# Medical gradient background
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    }
+
+    .main {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ---------------- Title ----------------
 st.markdown("<h1 style='text-align:center;color:#d63384;'>🩺 Breast Cancer Detection System</h1>", unsafe_allow_html=True)
