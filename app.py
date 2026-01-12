@@ -32,10 +32,7 @@ st.markdown("<p style='text-align:center;'>1D CNN + XGBoost | Wisconsin Dataset<
 st.markdown("---")
 
 # ---------------- Sidebar ----------------
-uploaded_file = st.sidebar.file_uploader(
-    "Upload CSV file",
-    type=["csv"]
-)
+
 st.sidebar.header("📥 Input Options")
 option = st.sidebar.radio("Choose input method:", ["Manual Input", "Upload CSV"])
 
