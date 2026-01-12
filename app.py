@@ -5,7 +5,7 @@ from tensorflow.keras.models import load_model
 
 st.title("Breast Cancer Detection System")
 
-cnn = load_model("model_cnn.h5")
+cnn = load_model("model_cnn_classifier.h5")
 xgb = pickle.load(open("model_xgb.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 
