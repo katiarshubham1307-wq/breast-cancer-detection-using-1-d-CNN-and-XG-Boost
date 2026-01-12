@@ -11,26 +11,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------- MEDICAL GRADIENT ----------------
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    }
-    .main {
-        background-color: rgba(255, 255, 255, 0.92);
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
-    
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
 # ---------------- Load Models ----------------
 cnn = load_model("model_cnn.h5")
 xgb = pickle.load(open("model_xgb.pkl", "rb"))
