@@ -3,9 +3,32 @@ import numpy as np
 import pandas as pd
 import pickle
 from tensorflow.keras.models import load_model
-
-# ---------------- Page Config ----------------
 import streamlit as st
+# Page configuration
+st.set_page_config(
+    page_title="Breast Cancer Detection",
+    page_icon="🩺",
+    layout="wide"
+)
+
+# Medical gradient background
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    }
+
+    .main {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 # Page config
 st.set_page_config(
