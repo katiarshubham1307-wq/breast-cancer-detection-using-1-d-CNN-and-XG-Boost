@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # ---------------- Load Models ----------------
-cnn = load_model("model_cnn.h5")
+cnn = load_model("model_cnn_classifier.h5")
 xgb = pickle.load(open("model_xgb.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 
