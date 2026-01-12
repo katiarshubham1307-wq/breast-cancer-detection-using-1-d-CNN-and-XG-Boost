@@ -47,14 +47,17 @@ if option == "Manual Input":
 # ---------------- CSV Upload ----------------
 else:
     uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
-    if uploaded_file:
-        df = pd.read_csv(uploaded_file)
-        st.write("📄 Uploaded Data Preview", df.head())
 
-        if df.shape[1] != 30:
-            st.error("CSV must contain exactly 30 feature columns.")
-        else:
-            inputs = df.iloc[0].values.tolist()
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file, header=None)
+
+    if df.empty:
+        st.error("❌ CSV file is empty. Please upload a file with 30 values.")
+    elif df.shape[1] != 30:
+        st.error("❌ CSV must contain exactly 30 features.")
+    else:
+        inputs = df.iloc[0].values.tolist()
+        st.success("✅ CSV file loaded successfully")
 
 # ---------------- Main Section ----------------
 col1, col2 = st.columns([2, 1])
