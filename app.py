@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 import pickle
 from tensorflow.keras.models import load_model
 
@@ -15,66 +16,81 @@ cnn = load_model("model_cnn.h5")
 xgb = pickle.load(open("model_xgb.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 
-# ---------------- Title Section ----------------
-st.markdown(
-    "<h1 style='text-align: center; color: #d63384;'>🩺 Breast Cancer Detection System</h1>",
-    unsafe_allow_html=True
-)
-st.markdown(
-    "<p style='text-align: center;'>Using <b>1D CNN + XGBoost</b> on Wisconsin Dataset</p>",
-    unsafe_allow_html=True
-)
+# ---------------- Feature Names ----------------
+feature_names = [
+    "Mean Radius", "Mean Texture", "Mean Perimeter", "Mean Area", "Mean Smoothness",
+    "Mean Compactness", "Mean Concavity", "Mean Concave Points", "Mean Symmetry", "Mean Fractal Dimension",
+    "Radius Error", "Texture Error", "Perimeter Error", "Area Error", "Smoothness Error",
+    "Compactness Error", "Concavity Error", "Concave Points Error", "Symmetry Error", "Fractal Dimension Error",
+    "Worst Radius", "Worst Texture", "Worst Perimeter", "Worst Area", "Worst Smoothness",
+    "Worst Compactness", "Worst Concavity", "Worst Concave Points", "Worst Symmetry", "Worst Fractal Dimension"
+]
+
+# ---------------- Title ----------------
+st.markdown("<h1 style='text-align:center;color:#d63384;'>🩺 Breast Cancer Detection System</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;'>1D CNN + XGBoost | Wisconsin Dataset</p>", unsafe_allow_html=True)
 st.markdown("---")
 
-# ---------------- Sidebar Inputs ----------------
-st.sidebar.header("🔢 Enter Tumor Features")
-st.sidebar.info("Please enter the 30 tumor feature values")
+# ---------------- Sidebar ----------------
+st.sidebar.header("📥 Input Options")
+option = st.sidebar.radio("Choose input method:", ["Manual Input", "Upload CSV"])
 
 inputs = []
-for i in range(30):
-    val = st.sidebar.number_input(
-        f"Feature {i+1}",
-        min_value=0.0,
-        value=0.0,
-        step=0.01
-    )
-    inputs.append(val)
 
-# ---------------- Main Area ----------------
+# ---------------- Manual Input ----------------
+if option == "Manual Input":
+    st.sidebar.subheader("Enter Tumor Features")
+    for name in feature_names:
+        val = st.sidebar.number_input(name, value=0.0, step=0.01)
+        inputs.append(val)
+
+# ---------------- CSV Upload ----------------
+else:
+    uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
+    if uploaded_file:
+        df = pd.read_csv(uploaded_file)
+        st.write("📄 Uploaded Data Preview", df.head())
+
+        if df.shape[1] != 30:
+            st.error("CSV must contain exactly 30 feature columns.")
+        else:
+            inputs = df.iloc[0].values.tolist()
+
+# ---------------- Main Section ----------------
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.subheader("📋 Model Information")
+    st.subheader("ℹ️ Project Information")
     st.write("""
     - **Dataset**: Wisconsin Breast Cancer Dataset  
-    - **Deep Learning Model**: 1D Convolutional Neural Network  
+    - **Deep Learning Model**: 1D CNN  
     - **Classifier**: XGBoost  
-    - **Output**: Benign or Malignant
+    - **Purpose**: Early breast cancer detection
     """)
 
-    st.subheader("🧪 Prediction")
-    predict_btn = st.button("🔍 Predict Cancer Type")
+    predict_btn = st.button("🔍 Predict")
 
 with col2:
-    st.subheader("📊 Result")
+    st.subheader("📊 Prediction Result")
 
-    if predict_btn:
+    if predict_btn and len(inputs) == 30:
         X = np.array(inputs).reshape(1, -1)
         X_scaled = scaler.transform(X)
         X_cnn = X_scaled.reshape(1, 30, 1)
 
         features = cnn.predict(X_cnn)
-        result = xgb.predict(features)
+        prob = xgb.predict_proba(features)[0]
+        result = np.argmax(prob)
 
-        if result[0] == 1:
-            st.success("🟢 **Benign Tumor**")
+        if result == 1:
+            st.success(f"🟢 **Benign Tumor**\n\nConfidence: {prob[1]*100:.2f}%")
             st.balloons()
         else:
-            st.error("🔴 **Malignant Tumor**")
+            st.error(f"🔴 **Malignant Tumor**\n\nConfidence: {prob[0]*100:.2f}%")
 
 # ---------------- Footer ----------------
 st.markdown("---")
 st.markdown(
-    "<p style='text-align: center; font-size: 14px;'>Final Year Project | Breast Cancer Detection</p>",
+    "<p style='text-align:center;font-size:14px;'>Final Year Project | Breast Cancer Detection using AI</p>",
     unsafe_allow_html=True
 )
