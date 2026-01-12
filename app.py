@@ -64,6 +64,7 @@ else:  # CSV Upload
 
 
 # ---------------- Main Section ----------------
+# ---------------- Main Section ----------------
 col1, col2 = st.columns([2, 1])
 
 with col1:
@@ -79,25 +80,30 @@ with col1:
 
 with col2:
     st.subheader("📊 Prediction Result")
-if predict_btn and len(inputs) == 30:
-    X = np.array(inputs, dtype=np.float32).reshape(1, 30)
-    X_scaled = scaler.transform(X)
-    X_cnn = X_scaled.reshape(1, 30, 1)
 
-    cnn_features = cnn.predict(X_cnn)
-    cnn_features = np.array(cnn_features).reshape(1, -1)
+    if predict_btn and len(inputs) == 30:
+        X = np.array(inputs, dtype=np.float32).reshape(1, 30)
+        X_scaled = scaler.transform(X)
+        X_cnn = X_scaled.reshape(1, 30, 1)
 
-    if cnn_features.shape[1] != 32:
-        st.error(f"Feature mismatch: expected 32, got {cnn_features.shape[1]}")
-    else:
-        prob = xgb.predict_proba(cnn_features)[0]
-        result = np.argmax(prob)
+        cnn_features = cnn.predict(X_cnn)
+        cnn_features = np.array(cnn_features).reshape(1, -1)
 
-        if result == 1:
-            st.success(f"🟢 Benign (Confidence: {prob[1]*100:.2f}%)")
-            st.balloons()
+        if cnn_features.shape[1] != 32:
+            st.error(f"Feature mismatch: expected 32, got {cnn_features.shape[1]}")
         else:
-            st.error(f"🔴 Malignant (Confidence: {prob[0]*100:.2f}%)")
+            prob = xgb.predict_proba(cnn_features)[0]
+            result = np.argmax(prob)
+
+            if result == 1:
+                st.success(f"🟢 Benign (Confidence: {prob[1]*100:.2f}%)")
+                st.balloons()
+            else:
+                st.error(f"🔴 Malignant (Confidence: {prob[0]*100:.2f}%)")
+
+    elif predict_btn:
+        st.warning("⚠️ Please provide all 30 input features.")
+
 
     
 # ---------------- Footer ----------------
