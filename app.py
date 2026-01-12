@@ -103,6 +103,6 @@ if predict_btn and len(inputs) == 30:
 # ---------------- Footer ----------------
 st.markdown("---")
 st.markdown(
-    "<p style='text-align:center;font-size:14px;'>Final Year Project | Breast Cancer Detection using AI</p>",
+    "<p style='text-align:center;font-size:14px;'> | Breast Cancer Detection using AI | </p>",
     unsafe_allow_html=True
 )
