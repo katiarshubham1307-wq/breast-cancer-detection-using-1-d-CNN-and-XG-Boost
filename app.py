@@ -28,7 +28,7 @@ feature_names = [
 
 # ---------------- Title ----------------
 st.markdown("<h1 style='text-align:center;color:#d63384;'>🩺 Breast Cancer Detection System</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center;'>1D CNN + XGBoost | Wisconsin Dataset</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;'>Next-Gen Diagnostic Intelligence</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # ---------------- Sidebar ----------------
@@ -68,12 +68,12 @@ else:  # CSV Upload
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.subheader("ℹ️ Project Information")
+    st.subheader("Fast.Accurate.Accessible")
     st.write("""
-    - **Dataset**: Wisconsin Breast Cancer Dataset  
-    - **Deep Learning Model**: 1D CNN  
-    - **Classifier**: XGBoost  
-    - **Purpose**: Early breast cancer detection
+        Bridging the gap between data and diagnosis.
+        By leveraging a hybrid 1D CNN and XGBoost architecture,
+        we provide a high accuracy screening tool designed for
+        the future of digital oncology.
     """)
 
     predict_btn = st.button("🔍 Predict")
