@@ -79,8 +79,8 @@ with col2:
         X_cnn = X_scaled.reshape(1, 30, 1)
 
         features = cnn.predict(X_cnn)
-features = features.reshape(1, -1)   # 🔥 IMPORTANT LINE
-prob = xgb.predict_proba(features)[0]
+        features = features.reshape(1, -1)   # 🔥 IMPORTANT LINE
+        prob = xgb.predict_proba(features)[0]
 
         result = np.argmax(prob)
 
